@@ -80,7 +80,7 @@ session_start();
 <!-- Barra de navegacion -->
 <nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="index.php">Tienda</a>
+    <a class="navbar-brand" href="index.php">TechIstmo</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -194,6 +194,41 @@ session_start();
         </div>
       </div>
       <div class="modal-footer">
+        <button type="button" class="btn btn-dark" onclick="agregarAlCarritoDesdeModal()" data-bs-dismiss="modal">
+          <i class="bi bi-cart-plus"></i> Agregar al carrito
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de Producto -->
+<div class="modal fade" id="modalProducto" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-light border-bottom">
+        <h5 class="modal-title" id="modalProductoTitulo" style="font-weight: 600;"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-4">
+        <div class="row">
+          <div class="col-md-5">
+            <img id="modalProductoImagen" src="" alt="" class="img-fluid" style="height: 300px; object-fit: cover; border-radius: 8px; width: 100%;">
+          </div>
+          <div class="col-md-7">
+            <div class="mb-4">
+              <h6 class="text-muted text-uppercase" style="font-size: 0.85rem; letter-spacing: 0.5px;">Descripción</h6>
+              <p id="modalProductoDescripcion" style="font-size: 0.95rem; line-height: 1.6; color: #555; text-align: justify;"></p>
+            </div>
+            <div class="mb-3">
+              <h6 class="text-muted text-uppercase" style="font-size: 0.85rem; letter-spacing: 0.5px;">Precio</h6>
+              <h4 id="modalProductoPrecio" style="font-weight: bold; color: #343a40;"></h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer border-top bg-light">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
         <button type="button" class="btn btn-dark" onclick="agregarAlCarritoDesdeModal()" data-bs-dismiss="modal">
           <i class="bi bi-cart-plus"></i> Agregar al carrito
         </button>

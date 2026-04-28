@@ -119,7 +119,7 @@ session_start();
     <!-- Barra de navegación -->
     <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.php">Tienda</a>
+            <a class="navbar-brand" href="index.php">TechIstmo</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
                 <span class="navbar-toggler-icon"></span>
             </button>

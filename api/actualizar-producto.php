@@ -28,6 +28,21 @@ if (empty($nombre)) {
     exit;
 }
 
+if (strlen($nombre) > 50) {
+    echo json_encode(["success" => false, "mensaje" => "El nombre no puede exceder 50 caracteres"]);
+    exit;
+}
+
+if (strlen($unidad) > 20) {
+    echo json_encode(["success" => false, "mensaje" => "La unidad no puede exceder 20 caracteres"]);
+    exit;
+}
+
+if (strlen($descripcion) > 500) {
+    echo json_encode(["success" => false, "mensaje" => "La descripción no puede exceder 500 caracteres"]);
+    exit;
+}
+
 if ($precioCosto <= 0 || $precioVenta <= 0) {
     echo json_encode(["success" => false, "mensaje" => "Los precios deben ser mayores a 0"]);
     exit;

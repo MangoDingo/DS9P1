@@ -85,6 +85,29 @@
       .alert {
         margin-bottom: 20px;
       }
+
+      .back-btn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: rgba(255,255,255,0.8);
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: #2a2b2c;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        z-index: 2;
+      }
+
+      .back-btn svg {
+        width: 18px;
+        height: 18px;
+        fill: currentColor;
+      }
     </style>
     <title>Inicio de sesión</title>
 </head>
@@ -92,6 +115,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <div class="login-container">
+      <a href="index.php" class="back-btn" aria-label="Volver">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+        </svg>
+      </a>
       <div class="login-bg"></div>
 
       <div class="login-form-container">

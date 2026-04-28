@@ -16,6 +16,11 @@ if (empty($nombreCat)) {
     exit;
 }
 
+if (strlen($nombreCat) > 100) {
+    echo json_encode(["success" => false, "mensaje" => "El nombre no puede exceder 100 caracteres"]);
+    exit;
+}
+
 // Si tiene ID, es edición
 if ($idCategoria > 0) {
     $sql = "UPDATE categoria SET nombreCat = ? WHERE idCategoria = ?";

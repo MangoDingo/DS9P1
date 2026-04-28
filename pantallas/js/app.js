@@ -192,12 +192,14 @@ function mostrarPagina(numeroPagina) {
   productosAMostrar.forEach(p => {
     contenedor.innerHTML += `
       <div class="col-md-3 mb-4">
-        <div class="card h-100 text-dark" style="cursor: pointer;" onclick="abrirModalProducto(${JSON.stringify(p).replace(/"/g, '&quot;')})">
-          <img src="../publics/productos/${p.imagen}" class="card-img-top">
+        <div class="card h-100 text-dark" style="cursor: pointer; transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+          <img src="../publics/productos/${p.imagen}" class="card-img-top" style="cursor: pointer;" onclick="abrirModalProducto(${JSON.stringify(p).replace(/"/g, '&quot;')})">
           <div class="card-body">
-            <h5 class="card-title">${p.nombre}</h5>
+            <h5 class="card-title" style="cursor: pointer; max-height: 3em; overflow: hidden; text-overflow: ellipsis;" onclick="abrirModalProducto(${JSON.stringify(p).replace(/"/g, '&quot;')})">${p.nombre}</h5>
             <p class="card-text">$${p.precioVenta}</p>
-            <button class="btn btn-dark w-100" onclick="event.stopPropagation(); agregarAlCarrito(${JSON.stringify(p).replace(/"/g, '&quot;')})">Agregar</button>
+            <button class="btn btn-dark w-100" onclick="event.stopPropagation(); agregarAlCarrito(${JSON.stringify(p).replace(/"/g, '&quot;')})">
+              <i class="bi bi-cart-plus"></i> Agregar
+            </button>
           </div>
         </div>
       </div>
@@ -354,4 +356,28 @@ function agregarAlCarritoDesdeModal() {
       }, 300);
     }
   });
+
+   let logoBtnPressTimer = null;
+  const logoBtn = document.querySelector('.navbar-brand');
+
+  if (logoBtn) {
+    logoBtn.addEventListener('mousedown', (e) => {
+      e.preventDefault();
+      logoBtnPressTimer = setTimeout(() => {
+        window.location.href = 'login.php';
+      }, 5000);
+    });
+
+    logoBtn.addEventListener('mouseup', () => {
+      if (logoBtnPressTimer) {
+        clearTimeout(logoBtnPressTimer);
+      }
+    });
+
+    logoBtn.addEventListener('mouseleave', () => {
+      if (logoBtnPressTimer) {
+        clearTimeout(logoBtnPressTimer);
+      }
+    });
+  }
 })();

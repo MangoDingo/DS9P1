@@ -497,7 +497,7 @@ session_start();
 <!-- Barra de navegacion -->
 <nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="index.php">Tienda</a>
+    <a class="navbar-brand" href="index.php">TechIstmo</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -619,30 +619,30 @@ session_start();
               <div class="form-row">
                 <div class="form-group">
                   <label for="idProducto">ID Producto</label>
-                  <input type="number" id="idProducto" placeholder="ID del producto" min="1">
+                  <input type="number" id="idProducto" placeholder="Escanear o escribir ID" min="1" max="9999999">
                 </div>
                 <div class="form-group">
                   <label for="nombre">Nombre</label>
-                  <input type="text" id="nombre" placeholder="Nombre del producto">
+                  <input type="text" id="nombre" placeholder="Nombre del producto" minlength="1" maxlength="50">
                 </div>
                 <div class="form-group">
                   <label for="precioCosto">Precio Costo</label>
-                  <input type="number" id="precioCosto" placeholder="0.00" step="0.01" min="0">
+                  <input type="number" id="precioCosto" placeholder="0.00" step="0.01" min="0" max="999999.99">
                 </div>
               </div>
 
               <div class="form-row">
                 <div class="form-group">
                   <label for="precioVenta">Precio Venta</label>
-                  <input type="number" id="precioVenta" placeholder="0.00" step="0.01" min="0">
+                  <input type="number" id="precioVenta" placeholder="0.00" step="0.01" min="0" max="999999.99">
                 </div>
                 <div class="form-group">
                   <label for="stock">Stock</label>
-                  <input type="number" id="stock" placeholder="0" min="0">
+                  <input type="number" id="stock" placeholder="0" min="0" max="999999">
                 </div>
                 <div class="form-group">
                   <label for="unidad">Unidad</label>
-                  <input type="text" id="unidad">
+                  <input type="text" id="unidad" minlength="1" maxlength="20">
                 </div>
               </div>
 
@@ -666,7 +666,7 @@ session_start();
           <!-- Descripción -->
           <div class="form-group">
             <label for="descripcion">Descripción</label>
-            <textarea id="descripcion" placeholder="Ingresa la descripción del producto"></textarea>
+            <textarea id="descripcion" placeholder="Ingresa la descripción del producto" maxlength="500"></textarea>
           </div>
         </div>
       </div>
@@ -741,7 +741,7 @@ session_start();
     <div class="modal-form-titulo" id="modalFormTitulo">Agregar Categoría</div>
     <div class="form-group-modal">
       <label for="modalFormNombre">Nombre</label>
-      <input type="text" id="modalFormNombre" placeholder="Ingresa el nombre">
+      <input type="text" id="modalFormNombre" placeholder="Ingresa el nombre" maxlength="100">
     </div>
     <div class="modal-form-botones">
       <button class="modal-form-btn modal-form-btn-cancelar" onclick="cerrarModalFormulario()">Cancelar</button>

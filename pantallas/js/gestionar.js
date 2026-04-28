@@ -62,6 +62,39 @@ document.addEventListener("DOMContentLoaded", () => {
   cargarProductos();
   cargarCategorias();
   cargarMarcas();
+
+  // Validar longitud máxima de los campos
+  const inputId = document.getElementById("idProducto");
+  inputId?.addEventListener("keypress", (e) => {
+    if (!/[0-9]/.test(e.key) || e.target.value.length >= 20) {
+      e.preventDefault();
+    }
+  });
+
+  // Mantener presionado el botón Tienda 5 segundos para ir a login
+  let logoBtnPressTimer = null;
+  const logoBtn = document.querySelector('.navbar-brand');
+
+  if (logoBtn) {
+    logoBtn.addEventListener('mousedown', (e) => {
+      e.preventDefault();
+      logoBtnPressTimer = setTimeout(() => {
+        window.location.href = 'login.php';
+      }, 5000);
+    });
+
+    logoBtn.addEventListener('mouseup', () => {
+      if (logoBtnPressTimer) {
+        clearTimeout(logoBtnPressTimer);
+      }
+    });
+
+    logoBtn.addEventListener('mouseleave', () => {
+      if (logoBtnPressTimer) {
+        clearTimeout(logoBtnPressTimer);
+      }
+    });
+  }
 });
 
 function verificarSesion() {
@@ -229,6 +262,9 @@ function editarProducto(idProducto) {
   // Guardar el ID original
   idProductoOriginal = String(producto.idProducto);
 
+  // Deshabilitar campo ID en modo edición
+  document.getElementById("idProducto").disabled = true;
+
   // Setear imagenSeleccionada a un valor para que no falle la validación
   // (se considera que la imagen actual es válida)
   imagenSeleccionada = "existente";
@@ -331,6 +367,11 @@ function guardarProducto() {
     return;
   }
 
+  if (nombre.length > 50) {
+    mostrarNotificacion("El nombre no puede exceder 50 caracteres", "error");
+    return;
+  }
+
   if (!precioCosto || isNaN(parseFloat(precioCosto)) || parseFloat(precioCosto) <= 0) {
     mostrarNotificacion("Por favor ingresa un precio de costo válido", "error");
     return;
@@ -356,6 +397,11 @@ function guardarProducto() {
     return;
   }
 
+  if (unidad.length > 20) {
+    mostrarNotificacion("La unidad no puede exceder 20 caracteres", "error");
+    return;
+  }
+
   if (!categoria || categoria === "") {
     mostrarNotificacion("Por favor selecciona una categoría", "error");
     return;
@@ -368,6 +414,11 @@ function guardarProducto() {
 
   if (!descripcion || descripcion === "") {
     mostrarNotificacion("Por favor ingresa la descripción", "error");
+    return;
+  }
+
+  if (descripcion.length > 500) {
+    mostrarNotificacion("La descripción no puede exceder 500 caracteres", "error");
     return;
   }
 
@@ -431,6 +482,7 @@ function guardarProducto() {
 
 function limpiarFormularioProducto() {
   document.getElementById("idProducto").value = "";
+  document.getElementById("idProducto").disabled = false;
   document.getElementById("nombre").value = "";
   document.getElementById("precioCosto").value = "";
   document.getElementById("precioVenta").value = "";
@@ -537,6 +589,11 @@ function guardarDesdeModal() {
 
   if (!nombre) {
     mostrarNotificacion("Por favor ingresa un nombre", "error");
+    return;
+  }
+
+  if (nombre.length > 100) {
+    mostrarNotificacion("El nombre no puede exceder 100 caracteres", "error");
     return;
   }
 
@@ -668,6 +725,21 @@ document.addEventListener("click", (e) => {
   let scanBuffer = "";
   let scanStart = 0;
   let scanTimeout = null;
+  let idProductoEnfocado = false;
+
+  const idInput = document.getElementById('idProducto');
+
+  // Rastrear si idProducto está enfocado
+  if (idInput) {
+    idInput.addEventListener('focus', () => {
+      idProductoEnfocado = true;
+    });
+
+    idInput.addEventListener('blur', () => {
+      idProductoEnfocado = false;
+      resetScan();
+    });
+  }
 
   function resetScan() {
     scanBuffer = "";
@@ -677,14 +749,15 @@ document.addEventListener("click", (e) => {
   }
 
   function handleAdminScan(code){
-    const idInput = document.getElementById('idProducto');
     if (idInput) {
       idInput.value = code;
-      idInput.focus();
     }
   }
 
   document.addEventListener('keydown', function(e){
+    // Solo procesar si idProducto está enfocado
+    if (!idProductoEnfocado) return;
+
     if (e.key === 'Enter') {
       if (scanBuffer.length >= 6 && (Date.now() - scanStart) < 2000) {
         const code = scanBuffer;
