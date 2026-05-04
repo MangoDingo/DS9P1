@@ -8,6 +8,6 @@
     mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
     if (!$conexion) {
-        header("Location: gestionar_productos.php?msg=" . urlencode("Error en la conexión a la base de datos."));
+        header("Location: index.php" . urlencode("Error en la conexión a la base de datos."));
         exit();
     }

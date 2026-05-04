@@ -80,7 +80,7 @@ session_start();
 <!-- Barra de navegacion -->
 <nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="index.php">TechIstmo</a>
+    <a class="navbar-brand" href="#" onclick="cargarPagina('index'); return false;">TechIstmo</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -93,7 +93,7 @@ session_start();
           <a class="nav-link" href="gestionar.php">Gestionar</a>
         </li>
         <li class="nav-item" id="navCarrito">
-          <a class="nav-link" href="carrito.php">Carrito <span class="badge bg-dark" id="cartBadge" style="display: none;">0</span></a>
+          <a class="nav-link" href="carrito.php" return false;">Carrito <span class="badge bg-dark" id="cartBadge" style="display: none;">0</span></a>
         </li>
         <li class="nav-item ms-auto">
           <div class="nav-link dropdown" id="navUsuario">
@@ -116,55 +116,57 @@ session_start();
 <div id="notificacionesContainer" style="position: fixed; top: 20px; right: 20px; z-index: 9999; max-width: 400px;"></div>
 
 <!-- Portada -->
-<div class="container-fluid p-0 position-relative">
-  <img src="../publics/portada.jpg" class="w-100" style="height: 70vh;" alt="Imagen de portada">
-  <!-- TEXTO CENTRADO -->
-  <div class="position-absolute top-50 start-50 translate-middle text-center text-dark-gray">
-    <h1 class="display-4 fw-bold">Bienvenido a la Tienda</h1>
-    <p class="lead">Las mejores ofertas en tecnología</p>
-  </div>
-  <!-- BARRA DE BÚSQUEDA ENCIMA (ABAJO) -->
-  <div class="position-absolute bottom-0 start-50 translate-middle-x w-100 mb-3">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 mx-auto">
-          <div class="input-group shadow">
-            <input type="text" class="form-control" id="inputBusqueda" placeholder="Buscar productos..." autofocus>
-            <button class="btn btn-dark" type="button" id="btnBuscar" onclick="buscar(); return false;">Buscar</button>
+<div id="contenidoPrincipal">
+  <div class="container-fluid p-0 position-relative">
+    <img src="../publics/portada.jpg" class="w-100" style="height: 70vh;" alt="Imagen de portada">
+    <!-- TEXTO CENTRADO -->
+    <div class="position-absolute top-50 start-50 translate-middle text-center text-dark-gray">
+      <h1 class="display-4 fw-bold">Bienvenido a la Tienda</h1>
+      <p class="lead">Las mejores ofertas en tecnología</p>
+    </div>
+    <!-- BARRA DE BÚSQUEDA ENCIMA (ABAJO) -->
+    <div class="position-absolute bottom-0 start-50 translate-middle-x w-100 mb-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 mx-auto">
+            <div class="input-group shadow">
+              <input type="text" class="form-control" id="inputBusqueda" placeholder="Buscar productos..." autofocus>
+              <button class="btn btn-dark" type="button" id="btnBuscar" onclick="buscar(); return false;">Buscar</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-<div class="container-fluid mt-4">
-  <div class="row">
+  <div class="container-fluid mt-4">
+    <div class="row">
 
-    <!-- SIDEBAR -->
-    <div class="col-md-3">
-      <div class="list-group" id="listaCategorias"></div>
+      <!-- SIDEBAR -->
+      <div class="col-md-3">
+        <div class="list-group" id="listaCategorias"></div>
+      </div>
+
+      <!-- PRODUCTOS -->
+      <div class="col-md-9">
+        <div class="row" id="productos"></div>
+
+        <!-- PAGINACIÓN -->
+        <nav aria-label="Paginación de productos" class="mt-5 d-flex justify-content-center">
+          <ul class="pagination">
+            <li class="page-item" id="btnAnterior">
+              <a class="page-link" href="#" onclick="paginaAnterior(); return false;">Anterior</a>
+            </li>
+            <li class="page-item active" id="paginaActual">
+              <span class="page-link">Página <span id="numeroPagina">1</span></span>
+            </li>
+            <li class="page-item" id="btnSiguiente">
+              <a class="page-link" href="#" onclick="paginaSiguiente(); return false;">Siguiente</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
     </div>
-
-    <!-- PRODUCTOS -->
-    <div class="col-md-9">
-      <div class="row" id="productos"></div>
-
-      <!-- PAGINACIÓN -->
-      <nav aria-label="Paginación de productos" class="mt-5 d-flex justify-content-center">
-        <ul class="pagination">
-          <li class="page-item" id="btnAnterior">
-            <a class="page-link" href="#" onclick="paginaAnterior(); return false;">Anterior</a>
-          </li>
-          <li class="page-item active" id="paginaActual">
-            <span class="page-link">Página <span id="numeroPagina">1</span></span>
-          </li>
-          <li class="page-item" id="btnSiguiente">
-            <a class="page-link" href="#" onclick="paginaSiguiente(); return false;">Siguiente</a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-
   </div>
 </div>
 

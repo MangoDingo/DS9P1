@@ -241,13 +241,6 @@ session_start();
                                     <input type="text" class="form-control" id="cvv" placeholder="000" maxlength="4">
                                 </div>
                             </div>
-
-                            <div class="form-grupo">
-                                <label class="form-label">Nombre del titular</label>
-                                <input type="text" class="form-control" id="nombreTitular" placeholder="Nombre completo">
-                            </div>
-                        </div>
-
                         <button class="btn btn-success w-100 mt-4" id="btnProcesarPago" onclick="procesarPago()">
                             <i class="bi bi-lock-fill"></i> Procesar pago
                         </button>

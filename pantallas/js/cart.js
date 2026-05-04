@@ -3,6 +3,7 @@ let carrito = [];
 // Cargar carrito cuando se carga la página
 document.addEventListener("DOMContentLoaded", () => {
     cargarCarrito();
+    actualizarBadgeCarrito();
     verificarSesion();
     renderizarCarrito();
 });
@@ -108,6 +109,7 @@ function renderizarCarrito() {
         document.getElementById("btnEliminarTodos").disabled = true;
         document.getElementById("btnProcesarPago").disabled = true;
         ocultarDatos();
+        calcularTotales();
         return;
     }
 
@@ -212,11 +214,10 @@ function procesarPago() {
     const numeroTarjeta = document.getElementById("numeroTarjeta").value.trim();
     const vencimiento = document.getElementById("vencimiento").value.trim();
     const cvv = document.getElementById("cvv").value.trim();
-    const nombreTitular = document.getElementById("nombreTitular").value.trim();
     const metodoPago = document.querySelector('input[name="metodoPago"]:checked').value;
 
     // Validaciones del lado del cliente
-    if (!numeroTarjeta || !vencimiento || !cvv || !nombreTitular) {
+    if (!numeroTarjeta || !vencimiento || !cvv) {
         mostrarNotificacion("Por favor completa todos los campos de la tarjeta", "advertencia");
         return;
     }
@@ -250,7 +251,6 @@ function procesarPago() {
         numeroTarjeta: numeroLimpio,
         vencimiento: vencimiento,
         cvv: cvv,
-        nombreTitular: nombreTitular,
         metodoPago: metodoPago,
         carrito: carrito
     };
@@ -268,12 +268,45 @@ function procesarPago() {
         if (data.success) {
             // Mostrar modal de éxito con información de la compra
             const modalContent = document.querySelector("#modalExito .modal-body");
+            
+            // Generar HTML de productos
+            let productosHTML = '';
+            data.carrito.forEach(producto => {
+                const precioTotal = producto.precioVenta * producto.cantidad;
+                productosHTML += `
+                    <div style="margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #e9ecef;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                            <strong>${producto.nombre}</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 0.9rem; color: #666;">
+                            <span>Cantidad: ${producto.cantidad} x $${parseFloat(producto.precioVenta).toFixed(2)}</span>
+                            <span>$${precioTotal.toFixed(2)}</span>
+                        </div>
+                    </div>
+                `;
+            });
+            
             modalContent.innerHTML = `
                 <i class="bi bi-check-circle" style="font-size: 3rem; color: #28a745;"></i>
                 <h6 class="mt-3">¡Compra realizada exitosamente!</h6>
                 <div class="alert alert-info mt-3" style="text-align: left; font-size: 0.9rem;">
                     <p class="mb-2"><strong>Número de Factura:</strong> #${data.idFactura}</p>
-                    <p class="mb-2"><strong>Nuevo Saldo:</strong> $${parseFloat(data.nuevoSaldo).toFixed(2)}</p>
+                    <hr style="margin: 10px 0;">
+                    <p style="margin-bottom: 5px;"><strong>Productos:</strong></p>
+                    ${productosHTML}
+                    <hr style="margin: 10px 0;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                        <span>Subtotal:</span>
+                        <span>$${parseFloat(data.subtotal).toFixed(2)}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span>ITBMS (7%):</span>
+                        <span>$${parseFloat(data.itbms).toFixed(2)}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 1.1rem;">
+                        <span>Total:</span>
+                        <span>$${parseFloat(data.total).toFixed(2)}</span>
+                    </div>
                 </div>
                 <p class="text-muted">Recibirás una confirmación por correo electrónico</p>
             `;
@@ -289,7 +322,6 @@ function procesarPago() {
             document.getElementById("numeroTarjeta").value = "";
             document.getElementById("vencimiento").value = "";
             document.getElementById("cvv").value = "";
-            document.getElementById("nombreTitular").value = "";
             document.getElementById("visa").checked = true;
 
             // Restaurar botón

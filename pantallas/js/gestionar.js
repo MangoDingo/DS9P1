@@ -156,7 +156,7 @@ function cargarProductos() {
 }
 
 function cargarCategorias() {
-  fetch("../api/categorias.php")
+  fetch("../api/categorias.php?t=" + new Date().getTime())
     .then(res => res.json())
     .then(data => {
       let selectCategoria = document.getElementById("selectCategoria");
@@ -171,7 +171,7 @@ function cargarCategorias() {
 }
 
 function cargarMarcas() {
-  fetch("../api/marcas.php")
+  fetch("../api/marcas.php?t=" + new Date().getTime())
     .then(res => res.json())
     .then(data => {
       let selectMarca = document.getElementById("selectMarca");
@@ -504,7 +504,7 @@ function limpiarFormularioProducto() {
 // FUNCIONES PARA EL MÓDULO DE CATEGORÍAS Y MARCAS
 
 function cargarCategoriasTabla() {
-  fetch("../api/categorias.php")
+  fetch("../api/categorias.php?t=" + new Date().getTime())
     .then(res => res.json())
     .then(data => {
       categorias = data;
@@ -532,7 +532,7 @@ function cargarCategoriasTabla() {
 }
 
 function cargarMarcasTabla() {
-  fetch("../api/marcas.php")
+  fetch("../api/marcas.php?t=" + new Date().getTime())
     .then(res => res.json())
     .then(data => {
       marcas = data;
@@ -616,6 +616,7 @@ function guardarDesdeModal() {
           mostrarNotificacion(data.mensaje, "success");
           cerrarModalFormulario();
           cargarCategoriasTabla();
+          cargarCategorias();
         } else {
           mostrarNotificacion(data.mensaje, "error");
         }
@@ -641,6 +642,7 @@ function guardarDesdeModal() {
           mostrarNotificacion(data.mensaje, "success");
           cerrarModalFormulario();
           cargarMarcasTabla();
+          cargarMarcas();
         } else {
           mostrarNotificacion(data.mensaje, "error");
         }
@@ -671,6 +673,7 @@ function eliminarCategoriaModal(idCategoria) {
           if (data.success) {
             mostrarNotificacion(data.mensaje, "success");
             cargarCategoriasTabla();
+            cargarCategorias();
           } else {
             mostrarNotificacion(data.mensaje, "error");
           }
@@ -700,6 +703,7 @@ function eliminarMarcaModal(idMarca) {
           if (data.success) {
             mostrarNotificacion(data.mensaje, "success");
             cargarMarcasTabla();
+            cargarMarcas();
           } else {
             mostrarNotificacion(data.mensaje, "error");
           }

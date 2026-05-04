@@ -191,17 +191,22 @@ try {
     $response["success"] = true;
     $response["message"] = "Pago procesado exitosamente";
     $response["idFactura"] = $idFactura;
-    $response["nuevoSaldo"] = $nuevoSaldo;
+    $response["carrito"] = $carrito;
+    $response["subtotal"] = $subtotal;
+    $response["itbms"] = $itbms;
+    $response["total"] = $total;
 
 } catch (Exception $e) {
     // Revertir transacción en caso de error
-    $conexion->rollback();
+    if ($conexion) {
+        $conexion->rollback();
+    }
     $response["message"] = "No pudimos procesar tu pago. Intenta más tarde o contacta al banco";
     error_log("Error en procesar-pago.php: " . $e->getMessage());
 }
 
 echo json_encode($response);
-$conexion->close();
+if ($conexion) {
+    $conexion->close();
+}
 ?>
-
-
