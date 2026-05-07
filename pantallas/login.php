@@ -151,6 +151,12 @@
     </div>
 
     <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        if (window.location.pathname.endsWith("login.php") || window.location.pathname.endsWith("gestionar.php") || window.location.pathname.endsWith("carrito.php")) {
+          history.replaceState(null, "", "index.php");
+        }
+      });
+
       document.getElementById("formLogin").addEventListener("submit", async (e) => {
         e.preventDefault();
 

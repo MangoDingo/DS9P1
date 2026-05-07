@@ -751,6 +751,12 @@ session_start();
 </div>
 
 <script src="js/gestionar.js"></script>
-
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    if (window.location.pathname.endsWith("gestionar.php") || window.location.pathname.endsWith("carrito.php")) {
+      history.replaceState(null, "", "index.php");
+    }
+  });
+</script>
 </body>
 </html>
