@@ -299,6 +299,9 @@ function abrirModalProducto(producto) {
   document.getElementById("modalProductoImagen").src = "../publics/productos/" + producto.imagen;
   document.getElementById("modalProductoDescripcion").textContent = producto.descripcion || "Sin descripción";
   document.getElementById("modalProductoPrecio").textContent = "$" + producto.precioVenta;
+  document.querySelectorAll(".modalProductoCantidad").forEach(el => {
+    el.textContent = producto.stock !== undefined && producto.stock !== null ? producto.stock : "N/A";
+  });
 
   const modal = new bootstrap.Modal(document.getElementById("modalProducto"));
   modal.show();

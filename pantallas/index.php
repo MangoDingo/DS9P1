@@ -192,6 +192,10 @@ session_start();
               <h6 class="text-muted">Precio</h6>
               <h4 class="text-dark" id="modalProductoPrecio" style="font-weight: bold;"></h4>
             </div>
+            <div class="mb-3">
+              <h6 class="text-muted">Cantidad</h6>
+              <h5 class="text-dark modalProductoCantidad" style="font-weight: bold;">-</h5>
+            </div>
           </div>
         </div>
       </div>
@@ -225,6 +229,10 @@ session_start();
             <div class="mb-3">
               <h6 class="text-muted text-uppercase" style="font-size: 0.85rem; letter-spacing: 0.5px;">Precio</h6>
               <h4 id="modalProductoPrecio" style="font-weight: bold; color: #343a40;"></h4>
+            </div>
+            <div class="mb-3">
+              <h6 class="text-muted text-uppercase" style="font-size: 0.85rem; letter-spacing: 0.5px;">Cantidad</h6>
+              <h5 class="text-dark modalProductoCantidad" style="font-weight: bold; color: #343a40;">-</h5>
             </div>
           </div>
         </div>
