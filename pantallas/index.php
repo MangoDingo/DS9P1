@@ -247,6 +247,12 @@ session_start();
   </div>
 </div>
 
+<footer class="bg-dark text-white py-3 mt-4">
+  <div class="container text-center">
+    <small>© 2026 TechIstmo. Todos los derechos reservados.</small>
+  </div>
+</footer>
+
 <!-- JS EXTERNO -->
 <script src="js/app.js"></script>
 </body>
